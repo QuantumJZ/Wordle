@@ -1,14 +1,51 @@
-﻿namespace Wordle
+﻿using System.IO;
+
+namespace Wordle
 {
     public partial class MainPage : ContentPage
     {
-        bool GameActive = true;
-        int x = 0;
-        int y = 0;
+        bool GameActive;
+        int x;
+        int y;
+        List<string> wordList = new List<string>();
+        string word = "";
+        Random rand = new Random();
 
         public MainPage()
         {
             InitializeComponent();
+            string line;
+            try
+            {
+                //Pass the file path and file name to the StreamReader constructor
+                StreamReader sr = new StreamReader("Resources\\Raw\\sgb-words.txt");
+                //Read the first line of text
+                line = sr.ReadLine();
+                //Continue to read until you reach end of file
+                while (line != null)
+                {
+                    wordList.Add(line);
+                    //Read the next line
+                    line = sr.ReadLine();
+                }
+                //close the file
+                sr.Close();
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            // Start the game by setting default values and picking a new word
+            startGame();
+        }
+
+        private void startGame()
+        {
+            GameActive = true;
+            x = 0;
+            y = 0;
+            word = wordList[rand.Next(wordList.Count())];
         }
 
         private void OnTextChanged(object sender, EventArgs e)
@@ -62,6 +99,10 @@
                 }
             }
         }
+
+        // TODO:
+        // On Enter isn't finished
+        // Implement word checking
     }
 
 }
