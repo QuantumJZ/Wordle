@@ -27,6 +27,7 @@
                 AlignItems="Start"
                 Wrap="Wrap">
                 <Border
+                    x:Name="Border00"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -41,6 +42,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border01"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -55,6 +57,7 @@
                         FontAttributes="Bold"/>
                  </Border>
                 <Border
+                    x:Name="Border02"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -69,6 +72,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border03"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -83,6 +87,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border04"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -97,6 +102,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border10"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -111,6 +117,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border11"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -125,6 +132,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border12"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -139,6 +147,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border13"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -153,6 +162,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border14"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -167,6 +177,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border20"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -181,6 +192,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border21"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -195,6 +207,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border22"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -209,6 +222,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border23"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -223,6 +237,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border24"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -237,6 +252,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border30"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -251,6 +267,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border31"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -265,6 +282,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border32"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -279,6 +297,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border33"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -293,6 +312,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border34"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -307,6 +327,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border40"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -321,6 +342,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border41"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -335,6 +357,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border42"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -349,6 +372,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border43"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -363,6 +387,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border44"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -377,6 +402,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border50"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -391,6 +417,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border51"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -405,6 +432,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border52"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -419,6 +447,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border53"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -433,6 +462,7 @@
                         FontAttributes="Bold"/>
                 </Border>
                 <Border
+                    x:Name="Border54"
                     HeightRequest="65"
                     WidthRequest="65"
                     Stroke="#59595a"
@@ -453,14 +483,17 @@
                 IsEnabled="True"
                 MinimumWidthRequest="0"
                 WidthRequest="0"
-                TextChanged="OnTextChanged"/>
+                TextChanged="OnTextChanged"
+                ReturnCommand="OnEnter"/>
             
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+            <!--Detail>
+                <Button
+                    x:Name="CounterBtn"
+                    Text="Click me" 
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Clicked="OnCounterClicked"
+                    HorizontalOptions="Fill">
+            </Detail-->
         </VerticalStackLayout>
     </ScrollView>
 
