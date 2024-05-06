@@ -18,7 +18,8 @@ namespace Wordle
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("Resources\\Raw\\sgb-words.txt");
+                // TODO: Change this to a relative path
+                StreamReader sr = new StreamReader("C:\\Users\\sukiw\\source\\repos\\Wordle\\Wordle\\Resources\\Raw\\sgb-words.txt");
                 //Read the first line of text
                 line = sr.ReadLine();
                 //Continue to read until you reach end of file
@@ -93,6 +94,7 @@ namespace Wordle
             {
                 if(y < 6)
                 {
+                    wordCheck();
                     y++;
                     x = 0;
                     TextEntry.Text = "";
@@ -100,9 +102,62 @@ namespace Wordle
             }
         }
 
+        private void wordCheck()
+        {
+            Dictionary<char, int> letterCount = new Dictionary<char, int>();
+            List<(char, int)> yellowChars = new List<(char, int)>();
+            for (int i = 0; i < 5; i++)
+            {
+                if (!letterCount.ContainsKey(word[i]))
+                {
+                    letterCount[word[i]] = 0;
+                }
+                letterCount[word[i]]++; ;
+            }
+            int correct = 0;
+            for(int i = 0; i < 5; i++)
+            {
+                Border currBorder = (Border)this.FindByName("Border" + y + i);
+                if (word[i] == TextEntry.Text[i])
+                {
+                    currBorder.BackgroundColor = Color.FromArgb("#6aaa64");
+                    correct++;
+                    letterCount[word[i]]--;
+                }
+                else if (word.Contains(TextEntry.Text[i]))
+                {
+                    //currBorder.BackgroundColor = Color.FromArgb("#c9b458");
+                    yellowChars.Add((TextEntry.Text[i], i));
+                }
+                else
+                {
+                    currBorder.BackgroundColor = Color.FromArgb("#787c7e");
+                }
+            }
+            foreach((char, int) c in yellowChars)
+            {
+                Border currBorder = (Border)this.FindByName("Border" + y + c.Item2);
+                if (letterCount[c.Item1] != 0)
+                {
+                    currBorder.BackgroundColor = Color.FromArgb("#c9b458");
+                    letterCount[c.Item1]--;
+                }
+                else
+                {
+                    currBorder.BackgroundColor = Color.FromArgb("#787c7e");
+                }
+            }
+            if(correct == 5)
+            {
+                GameActive = false;
+            }
+        }
+
         // TODO:
         // On Enter isn't finished
-        // Implement word checking
+        // Add animations
+        // Add starting screen w/ instructions
+        // Add ending screen w/ stats
     }
 
 }
