@@ -2,7 +2,6 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
         bool GameActive = true;
         int x = 0;
         int y = 0;
@@ -11,20 +10,6 @@
         {
             InitializeComponent();
         }
-
-        //private void OnCounterClicked(object sender, EventArgs e)
-        //{
-        //    count++;
-
-        //    if (count == 1)
-        //        CounterBtn.Text = $"Clicked {count} time";
-        //    else
-        //        CounterBtn.Text = $"Clicked {count} times";
-
-        //    SemanticScreenReader.Announce(CounterBtn.Text);
-        //}
-
-        // Border with letter color: #afafaf
 
         private void OnTextChanged(object sender, EventArgs e)
         {
@@ -45,6 +30,10 @@
                 }
                 else
                 {
+                    if(TextEntry.Text.Length == 0)
+                    {
+                        return;
+                    }
                     if (x < 5)
                     {
                         Label currBox = (Label)this.FindByName("Box" + y + x);
@@ -63,7 +52,15 @@
 
         private void OnEnter(object sender, EventArgs e)
         {
-
+            if(x == 5)
+            {
+                if(y < 6)
+                {
+                    y++;
+                    x = 0;
+                    TextEntry.Text = "";
+                }
+            }
         }
     }
 
