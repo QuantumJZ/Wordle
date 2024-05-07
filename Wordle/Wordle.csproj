@@ -66,22 +66,4 @@
 		<PackageReference Include="Syncfusion.Maui.Popup" Version="25.1.42" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="IntroPopup.xaml.cs">
-	    <DependentUpon>IntroPopup.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="ViewModel.xaml.cs">
-	    <DependentUpon>ViewModel.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="IntroPopup.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="ViewModel.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
 </Project>

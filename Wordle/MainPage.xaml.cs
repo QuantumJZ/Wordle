@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
-using Microsoft.UI.Xaml.Controls.Primitives;
-
+﻿
 namespace Wordle
 {
     public partial class MainPage : ContentPage
@@ -39,18 +37,13 @@ namespace Wordle
                 Console.WriteLine("Exception: " + e.Message);
             }
             // Display instructions
-            DisplayPopup();
-            //popup.Show();
+            //DisplayPopup();
+            popup.Show();
             // Start the game by setting default values and picking a new word
             startGame();
         }
 
-        public void DisplayPopup()
-        {
-            var popup = new IntroPopup();
-
-            this.ShowPopup(popup);
-        }
+        private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
 
         private void startGame()
         {
