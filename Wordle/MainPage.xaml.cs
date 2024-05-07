@@ -6,7 +6,7 @@ namespace Wordle
         bool GameActive;
         int x;
         int y;
-        List<string> wordList = new List<string>();
+        HashSet<string> wordList = new HashSet<string>();
         string word = "";
         Random rand = new Random();
 
@@ -45,14 +45,14 @@ namespace Wordle
 
         private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
         private void helpClicked(object? sender, EventArgs e) => popup.Show();
-        private void helpClosed(object? sender, EventArgs e) => TextEntry.Focus();
+        private void focusEntry(object? sender, EventArgs e) => TextEntry.Focus();
 
         private void startGame()
         {
             GameActive = true;
             x = 0;
             y = 0;
-            word = wordList[rand.Next(wordList.Count())];
+            word = wordList.ElementAt(rand.Next(wordList.Count()));
             TextEntry.Focus();
         }
 
@@ -99,16 +99,19 @@ namespace Wordle
         {
             if(x == 5)
             {
-                if(y < 6)
+                if (wordList.Contains(TextEntry.Text))
                 {
-                    wordCheck();
-                    y++;
-                    x = 0;
-                    TextEntry.Text = "";
-                }
-                if(y == 6)
-                {
-                    GameActive = false;
+                    if (y < 6)
+                    {
+                        wordCheck();
+                        y++;
+                        x = 0;
+                        TextEntry.Text = "";
+                    }
+                    if (y == 6)
+                    {
+                        GameActive = false;
+                    }
                 }
             }
         }
@@ -169,10 +172,7 @@ namespace Wordle
         //
         // Add animations
         //
-        // Add starting screen w/ instructions
-        //
         // Add ending screen w/ stats
-        // Maybe use Popups? https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/views/popup
         //
         // Add Keyboard at bottom of screen
     }

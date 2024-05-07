@@ -8,12 +8,13 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="30,10"
-            Spacing="25">
+            Spacing="25"
+            Focused="focusEntry">
             <sfPopup:SfPopup x:Name="popup"
                              ShowHeader="False"
                              AutoSizeMode="Both"
                              AnimationMode="Fade"
-                             Closed="helpClosed">
+                             Closed="focusEntry">
                 <sfPopup:SfPopup.PopupStyle>
                     <sfPopup:PopupStyle PopupBackground="Transparent" />
                 </sfPopup:SfPopup.PopupStyle>
