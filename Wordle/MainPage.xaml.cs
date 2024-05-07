@@ -44,6 +44,8 @@ namespace Wordle
         }
 
         private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
+        private void helpClicked(object? sender, EventArgs e) => popup.Show();
+        private void helpClosed(object? sender, EventArgs e) => TextEntry.Focus();
 
         private void startGame()
         {
@@ -51,6 +53,7 @@ namespace Wordle
             x = 0;
             y = 0;
             word = wordList[rand.Next(wordList.Count())];
+            TextEntry.Focus();
         }
 
         private void OnTextChanged(object sender, EventArgs e)
