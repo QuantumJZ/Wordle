@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using CommunityToolkit.Maui.Views;
+using Microsoft.UI.Xaml.Controls.Primitives;
 
 namespace Wordle
 {
@@ -37,8 +38,18 @@ namespace Wordle
             {
                 Console.WriteLine("Exception: " + e.Message);
             }
+            // Display instructions
+            DisplayPopup();
+            //popup.Show();
             // Start the game by setting default values and picking a new word
             startGame();
+        }
+
+        public void DisplayPopup()
+        {
+            var popup = new IntroPopup();
+
+            this.ShowPopup(popup);
         }
 
         private void startGame()
@@ -99,6 +110,10 @@ namespace Wordle
                     x = 0;
                     TextEntry.Text = "";
                 }
+                if(y == 6)
+                {
+                    GameActive = false;
+                }
             }
         }
 
@@ -131,7 +146,7 @@ namespace Wordle
                 }
                 else
                 {
-                    currBorder.BackgroundColor = Color.FromArgb("#787c7e");
+                    currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
                 }
             }
             foreach((char, int) c in yellowChars)
@@ -144,7 +159,7 @@ namespace Wordle
                 }
                 else
                 {
-                    currBorder.BackgroundColor = Color.FromArgb("#787c7e");
+                    currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
                 }
             }
             if(correct == 5)
@@ -155,9 +170,15 @@ namespace Wordle
 
         // TODO:
         // On Enter isn't finished
+        //
         // Add animations
+        //
         // Add starting screen w/ instructions
+        //
         // Add ending screen w/ stats
+        // Maybe use Popups? https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/views/popup
+        //
+        // Add Keyboard at bottom of screen
     }
 
 }

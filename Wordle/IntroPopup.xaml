@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           x:Class="Wordle.IntroPopup"
+           Color="Transparent">
+
+    <Border
+        x:Name="Border00"
+        WidthRequest="400"
+        HeightRequest="600"
+        Stroke="#59595a"
+        Margin="1.5"
+        BackgroundColor="#121213"
+        StrokeShape="RoundRectangle 40,40,40,40">
+        <VerticalStackLayout>
+            <BoxView   
+                    Color="Transparent"  
+                    Margin="0,20,0,0"                   
+                    HeightRequest="1"  
+                    HorizontalOptions="Fill" />
+            <Button Text="x"
+                    HorizontalOptions="End"
+                    TextColor="White"
+                    FontSize="Large"
+                    BackgroundColor="#121213"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    Clicked="closeClicked"/>
+            <Image Source="wordle_instructions.PNG"
+                Aspect="AspectFill"
+                WidthRequest="350"
+                HeightRequest="475"/>
+        </VerticalStackLayout>
+    </Border>
+
+</toolkit:Popup>
