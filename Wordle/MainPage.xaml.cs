@@ -77,7 +77,7 @@ namespace Wordle
         }
 
 
-        private void OnTextChanged(object sender, EventArgs e)
+        private async void OnTextChanged(object sender, EventArgs e)
         {
             if (GameActive)
             {
@@ -104,8 +104,10 @@ namespace Wordle
                         Label currBox = (Label)this.FindByName("Box" + y + x);
                         currBox.Text = TextEntry.Text[TextEntry.Text.Length - 1].ToString().ToUpper();
                         Border currBorder = (Border)this.FindByName("Border" + y + x);
-                        currBorder.Stroke = Color.FromArgb("#afafaf");
                         x++;
+                        await currBorder.ScaleTo(1.15, 50);
+                        currBorder.Stroke = Color.FromArgb("#afafaf");
+                        await currBorder.ScaleTo(1, 50);
                     }
                     else
                     {
