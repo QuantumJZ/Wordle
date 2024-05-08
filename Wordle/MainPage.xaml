@@ -8,8 +8,17 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="30,10"
-            Spacing="25"
-            Focused="focusEntry">
+            Spacing="0"
+            Focused="waitRefocus">
+            <Entry
+                x:Name="TextEntry"
+                IsEnabled="True"
+                MinimumWidthRequest="0"
+                WidthRequest="0"
+                MinimumHeightRequest="0"
+                HeightRequest="0"
+                TextChanged="OnTextChanged"
+                Completed="OnEnter"/>
             <sfPopup:SfPopup x:Name="popup"
                              ShowHeader="False"
                              AutoSizeMode="Both"
@@ -51,30 +60,43 @@
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
-            <HorizontalStackLayout
-                HorizontalOptions="End">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <BoxView   
+                    Grid.Column="0"
+                    Color="Transparent"  
+                    Margin="0,20,0,0"                   
+                    HeightRequest="10"
+                    WidthRequest="150"
+                    HorizontalOptions="Fill" />
                 <Label
+                    Grid.Column="1"
                     Text="Wordle"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1" 
                     FontFamily="Impact"
                     FontSize="45"
-                    HorizontalOptions="Center"/>
-                <BoxView   
-                    Color="Transparent"  
-                    Margin="0,20,0,0"                   
-                    HeightRequest="0"
-                    WidthRequest="465"
-                    HorizontalOptions="Fill" />
-                <ImageButton Source="wordle_help.PNG"
-                        BackgroundColor="Transparent"
-                        WidthRequest="150"
-                        HeightRequest="50"
-                        Clicked="helpClicked"/>
-            </HorizontalStackLayout>
+                    HorizontalOptions="Center"
+                    WidthRequest="150"/>
+                <ImageButton 
+                    Grid.Column="2"
+                    Source="wordle_help.PNG"
+                    BackgroundColor="Transparent"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    Clicked="helpClicked"
+                    HorizontalOptions="End"/>
+            </Grid>
             <BoxView   
                       Color="#272729"  
-                      Margin="0,-10,0,0"                   
+                      Margin="0,15,0,0"                   
                       HeightRequest="1"  
                       HorizontalOptions="Fill" />
             <FlexLayout
@@ -113,7 +135,7 @@
                         VerticalTextAlignment="Center"
                         FontSize="40"
                         FontAttributes="Bold"/>
-                 </Border>
+                </Border>
                 <Border
                     x:Name="Border02"
                     HeightRequest="65"
@@ -535,15 +557,323 @@
                         FontAttributes="Bold"/>
                 </Border>
             </FlexLayout>
-
-            <Entry
-                x:Name="TextEntry"
-                IsEnabled="True"
-                MinimumWidthRequest="0"
-                WidthRequest="0"
-                TextChanged="OnTextChanged"
-                Completed="OnEnter"/>
-            
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <Button 
+                    Text="Q"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="W"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="E"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="R"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="T"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="Y"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="U"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="I"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="O"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="P"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <Button 
+                    Text="A"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="S"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="D"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="F"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="G"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="H"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="J"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="K"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="L"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <Button 
+                    Text="ENTER"
+                    TextColor="White"
+                    FontSize="16"
+                    BackgroundColor="#818384"
+                    WidthRequest="82"
+                    HeightRequest="75"
+                    Clicked="OnEnter"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="Z"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="X"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="C"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="V"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="B"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="N"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="M"
+                    TextColor="White"
+                    FontSize="27"
+                    BackgroundColor="#818384"
+                    WidthRequest="53"
+                    HeightRequest="75"
+                    Clicked="KeyClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+                <Button 
+                    Text="DELETE"
+                    TextColor="White"
+                    FontSize="16"
+                    BackgroundColor="#818384"
+                    WidthRequest="82"
+                    HeightRequest="75"
+                    Clicked="DelClicked"
+                    FontFamily="FranklinGothic"
+                    FontAttributes="Bold"
+                    Margin="4"/>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 

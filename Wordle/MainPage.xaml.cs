@@ -46,6 +46,11 @@ namespace Wordle
         private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
         private void helpClicked(object? sender, EventArgs e) => popup.Show();
         private void focusEntry(object? sender, EventArgs e) => TextEntry.Focus();
+        private async void waitRefocus(object? sender, EventArgs e)
+        {
+            await Task.Delay(100);
+            TextEntry.Focus();
+        }
 
         private void startGame()
         {
@@ -55,6 +60,22 @@ namespace Wordle
             word = wordList.ElementAt(rand.Next(wordList.Count()));
             TextEntry.Focus();
         }
+
+        private void KeyClicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            TextEntry.Text += button.Text;
+            TextEntry.Focus();
+        }
+
+        private void DelClicked(object sender, EventArgs e)
+        {
+            if (TextEntry.Text.Length > 0)
+            {
+                TextEntry.Text = TextEntry.Text.Substring(0, TextEntry.Text.Length - 1);
+            }
+        }
+
 
         private void OnTextChanged(object sender, EventArgs e)
         {
@@ -71,7 +92,6 @@ namespace Wordle
                     currBox.Text = "";
                     Border currBorder = (Border)this.FindByName("Border" + y + x);
                     currBorder.Stroke = Color.FromArgb("#59595a");
-                    TextEntry.Text = TextEntry.Text.Substring(0, x);
                 }
                 else
                 {
@@ -99,7 +119,7 @@ namespace Wordle
         {
             if(x == 5)
             {
-                if (wordList.Contains(TextEntry.Text))
+                if (wordList.Contains(TextEntry.Text.ToLower()))
                 {
                     if (y < 6)
                     {
@@ -129,19 +149,20 @@ namespace Wordle
                 letterCount[word[i]]++; ;
             }
             int correct = 0;
+            string text = TextEntry.Text.ToLower();
             for(int i = 0; i < 5; i++)
             {
                 Border currBorder = (Border)this.FindByName("Border" + y + i);
-                if (word[i] == TextEntry.Text[i])
+                if (word[i] == text[i])
                 {
                     currBorder.BackgroundColor = Color.FromArgb("#6aaa64");
                     correct++;
                     letterCount[word[i]]--;
                 }
-                else if (word.Contains(TextEntry.Text[i]))
+                else if (word.Contains(text[i]))
                 {
                     //currBorder.BackgroundColor = Color.FromArgb("#c9b458");
-                    yellowChars.Add((TextEntry.Text[i], i));
+                    yellowChars.Add((text[i], i));
                 }
                 else
                 {
@@ -173,8 +194,6 @@ namespace Wordle
         // Add animations
         //
         // Add ending screen w/ stats
-        //
-        // Add Keyboard at bottom of screen
     }
 
 }
