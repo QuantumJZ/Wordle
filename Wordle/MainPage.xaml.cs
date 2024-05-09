@@ -75,7 +75,6 @@ namespace Wordle
             }
         }
 
-
         private async void OnTextChanged(object sender, EventArgs e)
         {
             if (GameActive)
@@ -151,13 +150,15 @@ namespace Wordle
             }
             int correct = 0;
             string text = TextEntry.Text.ToLower();
+            Dictionary<int, (Border, Color)> dict = new Dictionary<int, (Border, Color)>();
             for(int i = 0; i < 5; i++)
             {
                 Border currBorder = (Border)this.FindByName("Border" + y + i);
                 Button currButton = (Button)this.FindByName(text[i].ToString().ToUpper() + "Key");
                 if (word[i] == text[i])
                 {
-                    currBorder.BackgroundColor = Color.FromArgb("#6aaa64");
+                    dict[i] = (currBorder, Color.FromArgb("#6aaa64"));
+                    //currBorder.BackgroundColor = Color.FromArgb("#6aaa64");
                     currButton.BackgroundColor = Color.FromArgb("#6aaa64");
                     correct++;
                     letterCount[word[i]]--;
@@ -169,7 +170,8 @@ namespace Wordle
                 }
                 else
                 {
-                    currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
+                    dict[i] = (currBorder, Color.FromArgb("#3a3a3c"));
+                    //currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
                     currButton.BackgroundColor = Color.FromArgb("#3a3a3c");
                 }
             }
@@ -178,26 +180,36 @@ namespace Wordle
                 Border currBorder = (Border)this.FindByName("Border" + y + c.Item2);
                 if (letterCount[c.Item1] != 0)
                 {
-                    currBorder.BackgroundColor = Color.FromArgb("#c9b458");
+                    dict[c.Item2] = (currBorder, Color.FromArgb("#c9b458"));
+                    //currBorder.BackgroundColor = Color.FromArgb("#c9b458");
                     letterCount[c.Item1]--;
                 }
                 else
                 {
-                    currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
+                    dict[c.Item2] = (currBorder, Color.FromArgb("#3a3a3c"));
+                    //currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
                 }
             }
-            if(correct == 5)
+            flipLetter(dict);
+            if (correct == 5)
             {
                 GameActive = false;
+            }
+        }
+
+        private async void flipLetter(Dictionary<int, (Border, Color)> dict)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                await dict[i].Item1.ScaleYTo(0, 150);
+                dict[i].Item1.BackgroundColor = dict[i].Item2;
+                await dict[i].Item1.ScaleYTo(1, 150);
             }
         }
 
         // TODO:
         //
         // Add animations for:
-        // Entering word
-        // Correct guess
-        // Incorrect guess
         //
         // Add ending screen w/ stats
     }
