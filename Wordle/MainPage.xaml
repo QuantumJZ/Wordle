@@ -560,6 +560,7 @@
             <HorizontalStackLayout
                 HorizontalOptions="Center">
                 <Button 
+                    x:Name="QKey"
                     Text="Q"
                     TextColor="White"
                     FontSize="27"
@@ -571,6 +572,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="WKey"
                     Text="W"
                     TextColor="White"
                     FontSize="27"
@@ -582,6 +584,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="EKey"
                     Text="E"
                     TextColor="White"
                     FontSize="27"
@@ -593,6 +596,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="RKey"
                     Text="R"
                     TextColor="White"
                     FontSize="27"
@@ -604,6 +608,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="TKey"
                     Text="T"
                     TextColor="White"
                     FontSize="27"
@@ -615,6 +620,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="YKey"
                     Text="Y"
                     TextColor="White"
                     FontSize="27"
@@ -626,6 +632,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="UKey"
                     Text="U"
                     TextColor="White"
                     FontSize="27"
@@ -637,6 +644,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="IKey"
                     Text="I"
                     TextColor="White"
                     FontSize="27"
@@ -648,6 +656,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="OKey"
                     Text="O"
                     TextColor="White"
                     FontSize="27"
@@ -659,6 +668,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="PKey"
                     Text="P"
                     TextColor="White"
                     FontSize="27"
@@ -673,6 +683,7 @@
             <HorizontalStackLayout
                 HorizontalOptions="Center">
                 <Button 
+                    x:Name="AKey"
                     Text="A"
                     TextColor="White"
                     FontSize="27"
@@ -684,6 +695,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="SKey"
                     Text="S"
                     TextColor="White"
                     FontSize="27"
@@ -695,6 +707,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="DKey"
                     Text="D"
                     TextColor="White"
                     FontSize="27"
@@ -706,6 +719,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="FKey"
                     Text="F"
                     TextColor="White"
                     FontSize="27"
@@ -717,6 +731,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="GKey"
                     Text="G"
                     TextColor="White"
                     FontSize="27"
@@ -728,6 +743,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="HKey"
                     Text="H"
                     TextColor="White"
                     FontSize="27"
@@ -739,6 +755,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="JKey"
                     Text="J"
                     TextColor="White"
                     FontSize="27"
@@ -750,6 +767,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="KKey"
                     Text="K"
                     TextColor="White"
                     FontSize="27"
@@ -761,6 +779,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="LKey"
                     Text="L"
                     TextColor="White"
                     FontSize="27"
@@ -786,6 +805,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="ZKey"
                     Text="Z"
                     TextColor="White"
                     FontSize="27"
@@ -797,6 +817,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="XKey"
                     Text="X"
                     TextColor="White"
                     FontSize="27"
@@ -808,6 +829,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="CKey"
                     Text="C"
                     TextColor="White"
                     FontSize="27"
@@ -819,6 +841,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="VKey"
                     Text="V"
                     TextColor="White"
                     FontSize="27"
@@ -830,6 +853,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="BKey"
                     Text="B"
                     TextColor="White"
                     FontSize="27"
@@ -841,6 +865,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="NKey"
                     Text="N"
                     TextColor="White"
                     FontSize="27"
@@ -852,6 +877,7 @@
                     FontAttributes="Bold"
                     Margin="4"/>
                 <Button 
+                    x:Name="MKey"
                     Text="M"
                     TextColor="White"
                     FontSize="27"

@@ -37,7 +37,6 @@ namespace Wordle
                 Console.WriteLine("Exception: " + e.Message);
             }
             // Display instructions
-            //DisplayPopup();
             popup.Show();
             // Start the game by setting default values and picking a new word
             startGame();
@@ -155,20 +154,23 @@ namespace Wordle
             for(int i = 0; i < 5; i++)
             {
                 Border currBorder = (Border)this.FindByName("Border" + y + i);
+                Button currButton = (Button)this.FindByName(text[i].ToString().ToUpper() + "Key");
                 if (word[i] == text[i])
                 {
                     currBorder.BackgroundColor = Color.FromArgb("#6aaa64");
+                    currButton.BackgroundColor = Color.FromArgb("#6aaa64");
                     correct++;
                     letterCount[word[i]]--;
                 }
                 else if (word.Contains(text[i]))
                 {
-                    //currBorder.BackgroundColor = Color.FromArgb("#c9b458");
                     yellowChars.Add((text[i], i));
+                    currButton.BackgroundColor = Color.FromArgb("#c9b458");
                 }
                 else
                 {
                     currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
+                    currButton.BackgroundColor = Color.FromArgb("#3a3a3c");
                 }
             }
             foreach((char, int) c in yellowChars)
@@ -191,9 +193,11 @@ namespace Wordle
         }
 
         // TODO:
-        // On Enter isn't finished
         //
-        // Add animations
+        // Add animations for:
+        // Entering word
+        // Correct guess
+        // Incorrect guess
         //
         // Add ending screen w/ stats
     }
