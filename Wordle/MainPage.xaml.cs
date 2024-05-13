@@ -1,4 +1,6 @@
 ﻿
+using Syncfusion.Maui.Popup;
+
 namespace Wordle
 {
     public partial class MainPage : ContentPage
@@ -58,6 +60,12 @@ namespace Wordle
             y = 0;
             word = wordList.ElementAt(rand.Next(wordList.Count()));
             TextEntry.Focus();
+            wordDisplay.Text = word.ToUpper();
+        }
+
+        private void RestartGame(object sender, EventArgs e)
+        {
+            // Restart Game
         }
 
         private void KeyClicked(object sender, EventArgs e)
@@ -128,10 +136,6 @@ namespace Wordle
                         x = 0;
                         TextEntry.Text = "";
                     }
-                    if (y == 6)
-                    {
-                        GameActive = false;
-                    }
                 }
             }
         }
@@ -190,20 +194,30 @@ namespace Wordle
                     //currBorder.BackgroundColor = Color.FromArgb("#3a3a3c");
                 }
             }
-            flipLetter(dict);
-            if (correct == 5)
-            {
-                GameActive = false;
-            }
+            flipLetter(dict, correct);
         }
 
-        private async void flipLetter(Dictionary<int, (Border, Color)> dict)
+        private async void flipLetter(Dictionary<int, (Border, Color)> dict, int correct)
         {
             for (int i = 0; i < 5; i++)
             {
-                await dict[i].Item1.ScaleYTo(0, 150);
+                await dict[i].Item1.ScaleYTo(0, 200);
                 dict[i].Item1.BackgroundColor = dict[i].Item2;
-                await dict[i].Item1.ScaleYTo(1, 150);
+                await dict[i].Item1.ScaleYTo(1, 200);
+            }
+            if(correct == 5)
+            {
+                GameActive = false;
+                incorrectPopup.Show();
+                wordDisplayBorder.IsVisible = true;
+                Restart.IsVisible = true;
+            }
+            else if(y == 6)
+            {
+                GameActive = false;
+                incorrectPopup.Show();
+                wordDisplayBorder.IsVisible = true;
+                Restart.IsVisible = true;
             }
         }
 
@@ -212,6 +226,10 @@ namespace Wordle
         // Add animations for:
         //
         // Add ending screen w/ stats
+        //
+        // Implement stat saving
+        //
+        // Add Resetting Functionality
     }
 
 }
