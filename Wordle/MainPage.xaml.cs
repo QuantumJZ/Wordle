@@ -1,6 +1,4 @@
 ﻿
-using Syncfusion.Maui.Popup;
-
 namespace Wordle
 {
     public partial class MainPage : ContentPage
@@ -15,14 +13,26 @@ namespace Wordle
         public MainPage()
         {
             InitializeComponent();
-            string line;
-            try
+            // Load the word list and start a new game
+            Application.Current.Dispatcher.Dispatch(async () =>
             {
-                //Pass the file path and file name to the StreamReader constructor
-                // TODO: Change this to a relative path
-                StreamReader sr = new StreamReader("C:\\Users\\sukiw\\source\\repos\\Wordle\\Wordle\\Resources\\Raw\\sgb-words.txt");
-                //Read the first line of text
-                line = sr.ReadLine();
+                await InitAsync();
+            });
+
+        }
+
+        private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
+        private void helpClicked(object? sender, EventArgs e) => popup.Show();
+        private void focusEntry(object? sender, EventArgs e) => TextEntry.Focus();
+
+        private async Task InitAsync()
+        {
+            var stream = await FileSystem.OpenAppPackageFileAsync("sgb-words.txt");
+
+            if (stream != null)
+            {
+                StreamReader sr = new System.IO.StreamReader(stream);
+                string line = sr.ReadLine();
                 //Continue to read until you reach end of file
                 while (line != null)
                 {
@@ -30,13 +40,6 @@ namespace Wordle
                     //Read the next line
                     line = sr.ReadLine();
                 }
-                //close the file
-                sr.Close();
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
             }
             // Display instructions
             popup.Show();
@@ -44,9 +47,6 @@ namespace Wordle
             startGame();
         }
 
-        private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
-        private void helpClicked(object? sender, EventArgs e) => popup.Show();
-        private void focusEntry(object? sender, EventArgs e) => TextEntry.Focus();
         private async void waitRefocus(object? sender, EventArgs e)
         {
             await Task.Delay(100);
@@ -82,15 +82,10 @@ namespace Wordle
                 Button currButton = (Button)this.FindByName((char)(i+65) + "Key");
                 currButton.BackgroundColor = Color.FromArgb("#818384");
             }
-            x = 0;
-            y = 0;
             wordDisplayBorder.IsVisible = false;
             Restart.IsVisible = false;
-            word = wordList.ElementAt(rand.Next(wordList.Count()));
-            wordDisplay.Text = word.ToUpper();
             TextEntry.Text = "";
-            TextEntry.Focus();
-            GameActive = true;
+            startGame();
         }
 
         private void KeyClicked(object sender, EventArgs e)
