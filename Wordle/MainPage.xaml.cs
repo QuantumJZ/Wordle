@@ -66,6 +66,31 @@ namespace Wordle
         private void RestartGame(object sender, EventArgs e)
         {
             // Restart Game
+            for(int i = 0; i < 5; i++)
+            {
+                for(int j = 0; j < 6; j++)
+                {
+                    Label currBox = (Label)this.FindByName("Box" + j + i);
+                    currBox.Text = "";
+                    Border currBorder = (Border)this.FindByName("Border" + j + i);
+                    currBorder.Stroke = Color.FromArgb("#59595a");
+                    currBorder.BackgroundColor = Color.FromArgb("#121213");
+                }
+            }
+            for(int i = 0; i < 26; i++)
+            {
+                Button currButton = (Button)this.FindByName((char)(i+65) + "Key");
+                currButton.BackgroundColor = Color.FromArgb("#818384");
+            }
+            x = 0;
+            y = 0;
+            wordDisplayBorder.IsVisible = false;
+            Restart.IsVisible = false;
+            word = wordList.ElementAt(rand.Next(wordList.Count()));
+            wordDisplay.Text = word.ToUpper();
+            TextEntry.Text = "";
+            TextEntry.Focus();
+            GameActive = true;
         }
 
         private void KeyClicked(object sender, EventArgs e)
@@ -208,7 +233,7 @@ namespace Wordle
             if(correct == 5)
             {
                 GameActive = false;
-                incorrectPopup.Show();
+                correctPopup.Show();
                 wordDisplayBorder.IsVisible = true;
                 Restart.IsVisible = true;
             }
