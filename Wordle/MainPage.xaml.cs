@@ -11,6 +11,8 @@ namespace Wordle
         HashSet<string> wordList = new HashSet<string>();
         string word = "";
         Random rand = new Random();
+        int streak = 0;
+        List<int> statsList = new List<int>() { 0, 0, 0, 0, 0, 0 };
 
         public MainPage()
         {
@@ -33,7 +35,7 @@ namespace Wordle
 
             if (stream != null)
             {
-                StreamReader sr = new System.IO.StreamReader(stream);
+                StreamReader sr = new StreamReader(stream);
                 string line = sr.ReadLine();
                 //Continue to read until you reach end of file
                 while (line != null)
@@ -42,12 +44,24 @@ namespace Wordle
                     //Read the next line
                     line = sr.ReadLine();
                 }
+                sr.Close();
             }
             // Display instructions
             popup.Show();
-            correctPopup.Show();
             // Start the game by setting default values and picking a new word
             startGame();
+
+            string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "filesave.txt");
+            StreamReader stats = new StreamReader(targetFile);
+            if (stats != null)
+            {
+                streak = int.Parse(stats.ReadLine());
+                for(int i = 0; i < 6; i++)
+                {
+                    statsList[i] = int.Parse(stats.ReadLine());
+                }
+                stats.Close();
+            }
         }
 
         private async void waitRefocus(object? sender, EventArgs e)
@@ -230,6 +244,7 @@ namespace Wordle
             }
             if(correct == 5)
             {
+                writeStats(true);
                 GameActive = false;
                 correctPopup.Show();
                 wordDisplayBorder.IsVisible = true;
@@ -237,6 +252,7 @@ namespace Wordle
             }
             else if(y == 6)
             {
+                writeStats(false);
                 GameActive = false;
                 incorrectPopup.Show();
                 wordDisplayBorder.IsVisible = true;
@@ -244,8 +260,39 @@ namespace Wordle
             }
         }
 
+        private async void writeStats(bool correct)
+        {
+            if (correct)
+            {
+                streak++;
+                statsList[y - 1]++;
+                // Source: https://learn.microsoft.com/en-us/answers/questions/991205/how-to-write-a-text-file-in-maui
+                string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "filesave.txt");
+                using FileStream outputStream = File.OpenWrite(targetFile);
+                using StreamWriter streamWriter = new StreamWriter(outputStream);
+                await streamWriter.WriteLineAsync(streak.ToString());
+                for (int i = 0; i < 6; i++)
+                {
+                    await streamWriter.WriteLineAsync(statsList[i].ToString());
+                }
+            }
+            else
+            {
+                streak = 0;
+                string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "filesave.txt");
+                using FileStream outputStream = File.OpenWrite(targetFile);
+                using StreamWriter streamWriter = new StreamWriter(outputStream);
+                await streamWriter.WriteLineAsync(streak.ToString());
+                for (int i = 0; i < 6; i++)
+                {
+                    await streamWriter.WriteLineAsync(statsList[i].ToString());
+                }
+            }
+        }
+
         private void addStats(object sender, EventArgs e)
         {
+            int max = statsList.Max();
             Button x = new Button
             {
                 Text = "x",
@@ -301,6 +348,164 @@ namespace Wordle
                             },
                             new Label
                             {
+                                Text = "Streak: " + streak,
+                                FontSize = 25,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                FontAttributes = FontAttributes.Bold,
+                                Margin = 5
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "1",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[0] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "2",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[1] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "3",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double) statsList[2] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "4",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[3] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "5",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[4] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "6",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[5] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new Label
+                            {
                                 Text = "Click The Retry",
                                 FontSize = 20,
                                 HorizontalTextAlignment = TextAlignment.Center,
@@ -324,6 +529,7 @@ namespace Wordle
 
         private void addICStats(object sender, EventArgs e)
         {
+            int max = statsList.Max();
             Button x = new Button
             {
                 Text = "x",
@@ -376,6 +582,164 @@ namespace Wordle
                                 FontSize = 30,
                                 HorizontalTextAlignment = TextAlignment.Center,
                                 Margin = new Thickness(10)
+                            },
+                            new Label
+                            {
+                                Text = "Streak: " + streak,
+                                FontSize = 25,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                FontAttributes = FontAttributes.Bold,
+                                Margin = 5
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "1",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[0] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "2",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[1] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "3",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double) statsList[2] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "4",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[3] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "5",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[4] / max),
+                                        Margin = 2
+                                    }
+                                }
+                            },
+                            new HorizontalStackLayout
+                            {
+                                Children =
+                                {
+                                    new BoxView
+                                    {
+                                        Color = Colors.Transparent,
+                                        Margin = new Thickness(60,0,0,0),
+                                        HeightRequest = 1,
+                                        HorizontalOptions = LayoutOptions.Fill
+                                    },
+                                    new Label
+                                    {
+                                        Text = "6",
+                                        FontSize = 20,
+                                        Margin = 5
+                                    },
+                                    new Label
+                                    {
+                                        BackgroundColor = Colors.White,
+                                        WidthRequest = 250 * ((double)statsList[5] / max),
+                                        Margin = 2
+                                    }
+                                }
                             },
                             new Label
                             {
