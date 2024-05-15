@@ -59,119 +59,27 @@
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
-            <sfPopup:SfPopup x:Name="correctPopup"
+            <sfPopup:SfPopup 
+                 x:Name="correctPopup"
                  ShowHeader="False"
                  AutoSizeMode="Both"
                  AnimationMode="Fade"
+                 Opening="addStats"
                  Closed="focusEntry">
                 <sfPopup:SfPopup.PopupStyle>
                     <sfPopup:PopupStyle PopupBackground="Transparent" />
                 </sfPopup:SfPopup.PopupStyle>
-                <sfPopup:SfPopup.ContentTemplate>
-                    <DataTemplate>
-                        <Border
-                            WidthRequest="400"
-                            HeightRequest="600"
-                            Stroke="#59595a"
-                            Margin="1.5"
-                            BackgroundColor="#121213"
-                            StrokeShape="RoundRectangle 40,40,40,40">
-                            <VerticalStackLayout>
-                                <BoxView   
-                                    Color="Transparent"  
-                                    Margin="0,20,0,0"                   
-                                    HeightRequest="1"  
-                                    HorizontalOptions="Fill" />
-                                <Button Text="x"
-                                    HorizontalOptions="End"
-                                    TextColor="White"
-                                    FontSize="Large"
-                                    BackgroundColor="#121213"
-                                    WidthRequest="100"
-                                    HeightRequest="50"
-                                    Clicked="closeClicked"/>
-                                <Image 
-                                    Source="correct.png"
-                                    Aspect="AspectFill"
-                                    WidthRequest="100"
-                                    HeightRequest="100"
-                                    Margin="2"/>
-                                <Label
-                                    Text="Good Work!"
-                                    FontSize="30"
-                                    HorizontalTextAlignment="Center"
-                                    Margin="10"/>
-                                <Label
-                                    Text="Click The Retry"
-                                    FontSize="20"
-                                    HorizontalTextAlignment="Center"
-                                    Margin="5"/>
-                                <Label
-                                    Text="Button To Play Again"
-                                    FontSize="20"
-                                    HorizontalTextAlignment="Center"
-                                    Margin="5"/>
-                            </VerticalStackLayout>
-                        </Border>
-                    </DataTemplate>
-                </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
-            <sfPopup:SfPopup x:Name="incorrectPopup"
+            <sfPopup:SfPopup 
+                 x:Name="incorrectPopup"
                  ShowHeader="False"
                  AutoSizeMode="Both"
                  AnimationMode="Fade"
+                 Opening="addICStats"
                  Closed="focusEntry">
                 <sfPopup:SfPopup.PopupStyle>
                     <sfPopup:PopupStyle PopupBackground="Transparent" />
                 </sfPopup:SfPopup.PopupStyle>
-                <sfPopup:SfPopup.ContentTemplate>
-                    <DataTemplate>
-                        <Border
-                            WidthRequest="400"
-                            HeightRequest="600"
-                            Stroke="#59595a"
-                            Margin="1.5"
-                            BackgroundColor="#121213"
-                            StrokeShape="RoundRectangle 40,40,40,40">
-                            <VerticalStackLayout>
-                                <BoxView   
-                                    Color="Transparent"  
-                                    Margin="0,20,0,0"                   
-                                    HeightRequest="1"  
-                                    HorizontalOptions="Fill" />
-                                <Button Text="x"
-                                    HorizontalOptions="End"
-                                    TextColor="White"
-                                    FontSize="Large"
-                                    BackgroundColor="#121213"
-                                    WidthRequest="100"
-                                    HeightRequest="50"
-                                    Clicked="closeClicked"/>
-                                <Image 
-                                    Source="incorrect.png"
-                                    Aspect="AspectFill"
-                                    WidthRequest="100"
-                                    HeightRequest="100"
-                                    Margin="2"/>
-                                <Label
-                                    Text="Nice Try!"
-                                    FontSize="30"
-                                    HorizontalTextAlignment="Center"
-                                    Margin="10"/>
-                                <Label
-                                    Text="Click The Retry"
-                                    FontSize="20"
-                                    HorizontalTextAlignment="Center"
-                                    Margin="5"/>
-                                <Label
-                                    Text="Button To Play Again"
-                                    FontSize="20"
-                                    HorizontalTextAlignment="Center"
-                                    Margin="5"/>
-                            </VerticalStackLayout>
-                        </Border>
-                    </DataTemplate>
-                </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
             <Grid>
                 <Grid.RowDefinitions>

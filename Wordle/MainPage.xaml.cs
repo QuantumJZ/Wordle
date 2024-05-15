@@ -1,4 +1,6 @@
-﻿
+﻿using Microsoft.Maui.Controls.Shapes;
+using Syncfusion.Maui.Popup;
+
 namespace Wordle
 {
     public partial class MainPage : ContentPage
@@ -43,6 +45,7 @@ namespace Wordle
             }
             // Display instructions
             popup.Show();
+            correctPopup.Show();
             // Start the game by setting default values and picking a new word
             startGame();
         }
@@ -241,15 +244,168 @@ namespace Wordle
             }
         }
 
+        private void addStats(object sender, EventArgs e)
+        {
+            Button x = new Button
+            {
+                Text = "x",
+                HorizontalOptions = LayoutOptions.End,
+                TextColor = Colors.White,
+                FontSize = 35,
+                BackgroundColor = Color.FromArgb("#121213"),
+                WidthRequest = 100,
+                HeightRequest = 50,
+
+            };
+            var popup = (SfPopup)sender;
+            x.Clicked +=  (sender, e) =>  popup.Dismiss();
+            DataTemplate templateView = new DataTemplate(() =>
+            {
+                Border border = new Border
+                {
+                    WidthRequest = 400,
+                    HeightRequest = 600,
+                    Stroke = Color.FromArgb("#59595a"),
+                    Margin = 1.5,
+                    BackgroundColor = Color.FromArgb("#121213"),
+                    StrokeShape = new RoundRectangle
+                    {
+                        CornerRadius = new CornerRadius(40, 40, 40, 40)
+                    },
+                    Content = new VerticalStackLayout
+                    {
+                        Children =
+                        {
+                            new BoxView
+                            {
+                                Color = Colors.Transparent,
+                                Margin = new Thickness(0,20,0,0),
+                                HeightRequest = 1,
+                                HorizontalOptions = LayoutOptions.Fill
+                            },
+                            x,
+                            new Image
+                            {
+                                Source = "correct.png",
+                                Aspect = Aspect.AspectFill,
+                                WidthRequest = 100,
+                                HeightRequest = 100,
+                                Margin = new Thickness(2)
+                            },
+                            new Label
+                            {
+                                Text = "Good Work!",
+                                FontSize = 30,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Margin = new Thickness(10)
+                            },
+                            new Label
+                            {
+                                Text = "Click The Retry",
+                                FontSize = 20,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Margin = new Thickness(5)
+                            },
+                            new Label
+                            {
+                                Text = "Button To Play Again",
+                                FontSize = 20,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Margin = new Thickness(5)
+                            }
+                        }
+                    },
+                };
+                return border;
+            });
+            popup.ContentTemplate = templateView;
+            popup.Refresh();
+        }
+
+        private void addICStats(object sender, EventArgs e)
+        {
+            Button x = new Button
+            {
+                Text = "x",
+                HorizontalOptions = LayoutOptions.End,
+                TextColor = Colors.White,
+                FontSize = 35,
+                BackgroundColor = Color.FromArgb("#121213"),
+                WidthRequest = 100,
+                HeightRequest = 50,
+
+            };
+            var popup = (SfPopup)sender;
+            x.Clicked += (sender, e) => popup.Dismiss();
+            DataTemplate templateView = new DataTemplate(() =>
+            {
+                Border border = new Border
+                {
+                    WidthRequest = 400,
+                    HeightRequest = 600,
+                    Stroke = Color.FromArgb("#59595a"),
+                    Margin = 1.5,
+                    BackgroundColor = Color.FromArgb("#121213"),
+                    StrokeShape = new RoundRectangle
+                    {
+                        CornerRadius = new CornerRadius(40, 40, 40, 40)
+                    },
+                    Content = new VerticalStackLayout
+                    {
+                        Children =
+                        {
+                            new BoxView
+                            {
+                                Color = Colors.Transparent,
+                                Margin = new Thickness(0,20,0,0),
+                                HeightRequest = 1,
+                                HorizontalOptions = LayoutOptions.Fill
+                            },
+                            x,
+                            new Image
+                            {
+                                Source = "incorrect.png",
+                                Aspect = Aspect.AspectFill,
+                                WidthRequest = 100,
+                                HeightRequest = 100,
+                                Margin = new Thickness(2)
+                            },
+                            new Label
+                            {
+                                Text = "Nice Try!",
+                                FontSize = 30,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Margin = new Thickness(10)
+                            },
+                            new Label
+                            {
+                                Text = "Click The Retry",
+                                FontSize = 20,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Margin = new Thickness(5)
+                            },
+                            new Label
+                            {
+                                Text = "Button To Play Again",
+                                FontSize = 20,
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Margin = new Thickness(5)
+                            }
+                        }
+                    },
+                };
+                return border;
+            });
+            popup.ContentTemplate = templateView;
+            popup.Refresh();
+        }
+
         // TODO:
         //
         // Add animations for:
         //
-        // Add ending screen w/ stats
-        //
         // Implement stat saving
         //
-        // Add Resetting Functionality
     }
 
 }
