@@ -1,3 +1,5 @@
+https://github.com/QuantumJZ/Wordle/assets/88168521/0888f091-bd8b-4bb2-a373-059e1237ada1
+
 # Wordle Clone
 
 This application mimics the form and functionality of the popular web game [Wordle](https://www.nytimes.com/games/wordle/index.html).
@@ -29,6 +31,7 @@ This project was developed entirely using the .NET MAUI development platform wit
 * Desync between internal word tracking and visual display
 * Characters getting stuck on screen with delete not working
 * Black screen after initial loading - Requires closing and rerunning program
+* Application does not resize based on screen sizing, may be too large or small for some devices
 
 ## Authors
 
