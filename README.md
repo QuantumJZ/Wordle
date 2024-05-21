@@ -16,12 +16,11 @@ This project was developed entirely using the .NET MAUI development platform wit
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Download or import the repository onto your local machine.
+* Installation of the Syncfusion Core/Popup nuget packages to run may be required (although it shouldn't be).
 
 ### Executing program
 
-* Download or import the repository onto your local machine.
 * Open the solution .sln file using the latest version of Visual Studio (Visual Studio 2022 was used for testing).
 * Run the application by clicking "Windows Machine" at the top of the window.
 
@@ -38,6 +37,5 @@ Justin Zhu
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
 * [Wordle](https://www.nytimes.com/games/wordle/index.html)
 * [Syncfusion](https://help.syncfusion.com/maui/popup/getting-started)
