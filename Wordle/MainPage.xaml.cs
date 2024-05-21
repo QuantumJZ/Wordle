@@ -52,15 +52,21 @@ namespace Wordle
             startGame();
 
             string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "filesave.txt");
-            StreamReader stats = new StreamReader(targetFile);
-            if (stats != null)
+            try
             {
-                streak = int.Parse(stats.ReadLine());
-                for(int i = 0; i < 6; i++)
+                using (StreamReader stats = new StreamReader(targetFile))
                 {
-                    statsList[i] = int.Parse(stats.ReadLine());
+                    streak = int.Parse(stats.ReadLine());
+                    for (int i = 0; i < 6; i++)
+                    {
+                        statsList[i] = int.Parse(stats.ReadLine());
+                    }
+                    stats.Close();
                 }
-                stats.Close();
+            }
+            catch
+            {
+                // Do nothing
             }
         }
 
