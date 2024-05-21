@@ -296,7 +296,7 @@ namespace Wordle
             }
         }
 
-        private void addStats(object sender, EventArgs e)
+        private async void addStats(object sender, EventArgs e)
         {
             int max = statsList.Max();
             Button x = new Button
@@ -309,6 +309,48 @@ namespace Wordle
                 WidthRequest = 100,
                 HeightRequest = 50,
 
+            };
+            Label statRow1 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow2 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow3 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow4 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow5 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow6 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
             };
             var popup = (SfPopup)sender;
             x.Clicked +=  (sender, e) =>  popup.Dismiss();
@@ -377,12 +419,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[0] / max),
-                                        Margin = 2
-                                    }
+                                    statRow1
                                 }
                             },
                             new HorizontalStackLayout
@@ -402,12 +439,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[1] / max),
-                                        Margin = 2
-                                    }
+                                    statRow2
                                 }
                             },
                             new HorizontalStackLayout
@@ -427,12 +459,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double) statsList[2] / max),
-                                        Margin = 2
-                                    }
+                                    statRow3
                                 }
                             },
                             new HorizontalStackLayout
@@ -452,12 +479,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[3] / max),
-                                        Margin = 2
-                                    }
+                                    statRow4
                                 }
                             },
                             new HorizontalStackLayout
@@ -477,12 +499,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[4] / max),
-                                        Margin = 2
-                                    }
+                                    statRow5
                                 }
                             },
                             new HorizontalStackLayout
@@ -502,12 +519,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[5] / max),
-                                        Margin = 2
-                                    }
+                                    statRow6
                                 }
                             },
                             new Label
@@ -531,6 +543,12 @@ namespace Wordle
             });
             popup.ContentTemplate = templateView;
             popup.Refresh();
+            new Animation(v=>statRow1.WidthRequest = v, 1, 250 * ((double)statsList[0] / max)).Commit(this, "statBarAnimation1", 16, (uint)(7 * 250 * ((double)statsList[0] / max)));
+            new Animation(v=>statRow2.WidthRequest = v, 1, 250 * ((double)statsList[1] / max)).Commit(this, "statBarAnimation2", 16, (uint)(7 * 250 * ((double)statsList[1] / max)));
+            new Animation(v=>statRow3.WidthRequest = v, 1, 250 * ((double)statsList[2] / max)).Commit(this, "statBarAnimation3", 16, (uint)(7 * 250 * ((double)statsList[2] / max)));
+            new Animation(v=>statRow4.WidthRequest = v, 1, 250 * ((double)statsList[3] / max)).Commit(this, "statBarAnimation4", 16, (uint)(7 * 250 * ((double)statsList[3] / max)));
+            new Animation(v=>statRow5.WidthRequest = v, 1, 250 * ((double)statsList[4] / max)).Commit(this, "statBarAnimation5", 16, (uint)(7 * 250 * ((double)statsList[4] / max)));
+            new Animation(v=>statRow6.WidthRequest = v, 1, 250 * ((double)statsList[5] / max)).Commit(this, "statBarAnimation6", 16, (uint)(7 * 250 * ((double)statsList[5] / max)));
         }
 
         private void addICStats(object sender, EventArgs e)

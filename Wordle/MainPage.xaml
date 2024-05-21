@@ -938,9 +938,11 @@
             </Border>
             <Button
                 x:Name="Restart"
-                WidthRequest="100"
-                HeightRequest="80"
+                WidthRequest="110"
+                HeightRequest="100"
                 BackgroundColor="Transparent"
+                BorderColor="White"
+                BorderWidth="4"
                 IsVisible="False"
                 Clicked="RestartGame"
                 ImageSource="restart.png"/>
