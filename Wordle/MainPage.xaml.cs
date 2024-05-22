@@ -14,6 +14,9 @@ namespace Wordle
         int streak = 0;
         List<int> statsList = new List<int>() { 0, 0, 0, 0, 0, 0 };
 
+        /// <summary>
+        /// Initialize the main page load the word list in another thread
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -25,10 +28,29 @@ namespace Wordle
 
         }
 
+        /// <summary>
+        /// Dismiss the popup when close is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeClicked(object? sender, EventArgs e) => popup.Dismiss();
+        /// <summary>
+        /// Show the help popup when the help button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void helpClicked(object? sender, EventArgs e) => popup.Show();
+        /// <summary>
+        /// Focus the text entry. Necessary when clicking elsewhere in the application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void focusEntry(object? sender, EventArgs e) => TextEntry.Focus();
 
+        /// <summary>
+        /// Load the word list, start the game, then load the current file save if it exists.
+        /// </summary>
+        /// <returns> A task so this method can run asynchronously </returns>
         private async Task InitAsync()
         {
             var stream = await FileSystem.OpenAppPackageFileAsync("sgb-words.txt");
@@ -70,12 +92,20 @@ namespace Wordle
             }
         }
 
+        /// <summary>
+        /// Refocus the text entry after a 0.1 second delay, accounting for clicking on a button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void waitRefocus(object? sender, EventArgs e)
         {
             await Task.Delay(100);
             TextEntry.Focus();
         }
 
+        /// <summary>
+        /// Set the game to active and pick a new word
+        /// </summary>
         private void startGame()
         {
             GameActive = true;
@@ -86,6 +116,11 @@ namespace Wordle
             wordDisplay.Text = word.ToUpper();
         }
 
+        /// <summary>
+        /// Restart the game by resetting all letter boxes and calling startGame again
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RestartGame(object sender, EventArgs e)
         {
             // Restart Game
@@ -111,6 +146,11 @@ namespace Wordle
             startGame();
         }
 
+        /// <summary>
+        /// Simulate a key press by adding text to the text entry
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KeyClicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -118,6 +158,11 @@ namespace Wordle
             TextEntry.Focus();
         }
 
+        /// <summary>
+        /// Simulate a delete key by trimming the text entry by the last letter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DelClicked(object sender, EventArgs e)
         {
             if (TextEntry.Text.Length > 0)
@@ -126,6 +171,11 @@ namespace Wordle
             }
         }
 
+        /// <summary>
+        /// Handle the text entry being changed by checking which key was pressed and handle accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnTextChanged(object sender, EventArgs e)
         {
             if (GameActive)
@@ -166,6 +216,11 @@ namespace Wordle
             }
         }
 
+        /// <summary>
+        /// Handle the enter key being pressed and check if the given text is a word if all five letters in the row are filled
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnEnter(object sender, EventArgs e)
         {
             if(x == 5)
@@ -183,6 +238,9 @@ namespace Wordle
             }
         }
 
+        /// <summary>
+        /// Check if a word is valid and flip/color change letters if it is
+        /// </summary>
         private void wordCheck()
         {
             Dictionary<char, int> letterCount = new Dictionary<char, int>();
@@ -240,6 +298,11 @@ namespace Wordle
             flipLetter(dict, correct);
         }
 
+        /// <summary>
+        /// Animate flipping letters and setting their color to gray, yellow, or green
+        /// </summary>
+        /// <param name="dict"> Holds the corresponding border to its correct color </param>
+        /// <param name="correct"> The number of correct letters </param>
         private async void flipLetter(Dictionary<int, (Border, Color)> dict, int correct)
         {
             for (int i = 0; i < 5; i++)
@@ -266,6 +329,10 @@ namespace Wordle
             }
         }
 
+        /// <summary>
+        /// Write the new stats to the file save or create a new one if it doesn't exist
+        /// </summary>
+        /// <param name="correct"></param>
         private async void writeStats(bool correct)
         {
             if (correct)
@@ -296,6 +363,11 @@ namespace Wordle
             }
         }
 
+        /// <summary>
+        /// Create the correct popup with stats programatically because I am using a Syncfusion popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void addStats(object sender, EventArgs e)
         {
             int max = statsList.Max();
@@ -524,14 +596,14 @@ namespace Wordle
                             },
                             new Label
                             {
-                                Text = "Click The Retry",
+                                Text = "Click The Retry Button",
                                 FontSize = 20,
                                 HorizontalTextAlignment = TextAlignment.Center,
                                 Margin = new Thickness(5)
                             },
                             new Label
                             {
-                                Text = "Button To Play Again",
+                                Text = "At The Bottom To Play Again",
                                 FontSize = 20,
                                 HorizontalTextAlignment = TextAlignment.Center,
                                 Margin = new Thickness(5)
@@ -551,6 +623,11 @@ namespace Wordle
             new Animation(v=>statRow6.WidthRequest = v, 1, 250 * ((double)statsList[5] / max)).Commit(this, "statBarAnimation6", 16, (uint)(7 * 250 * ((double)statsList[5] / max)));
         }
 
+        /// <summary>
+        /// Create the incorrect popup with stats programatically because I am using a Syncfusion popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addICStats(object sender, EventArgs e)
         {
             int max = statsList.Max();
@@ -564,6 +641,48 @@ namespace Wordle
                 WidthRequest = 100,
                 HeightRequest = 50,
 
+            };
+            Label statRow1 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow2 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow3 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow4 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow5 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            Label statRow6 = new Label
+            {
+                BackgroundColor = Colors.White,
+                WidthRequest = 1,
+                Margin = 2,
+                HorizontalOptions = LayoutOptions.Center
             };
             var popup = (SfPopup)sender;
             x.Clicked += (sender, e) => popup.Dismiss();
@@ -632,12 +751,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[0] / max),
-                                        Margin = 2
-                                    }
+                                    statRow1
                                 }
                             },
                             new HorizontalStackLayout
@@ -657,12 +771,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[1] / max),
-                                        Margin = 2
-                                    }
+                                    statRow2
                                 }
                             },
                             new HorizontalStackLayout
@@ -682,12 +791,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double) statsList[2] / max),
-                                        Margin = 2
-                                    }
+                                    statRow3
                                 }
                             },
                             new HorizontalStackLayout
@@ -707,12 +811,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[3] / max),
-                                        Margin = 2
-                                    }
+                                    statRow4
                                 }
                             },
                             new HorizontalStackLayout
@@ -732,12 +831,7 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[4] / max),
-                                        Margin = 2
-                                    }
+                                    statRow5
                                 }
                             },
                             new HorizontalStackLayout
@@ -757,24 +851,19 @@ namespace Wordle
                                         FontSize = 20,
                                         Margin = 5
                                     },
-                                    new Label
-                                    {
-                                        BackgroundColor = Colors.White,
-                                        WidthRequest = 250 * ((double)statsList[5] / max),
-                                        Margin = 2
-                                    }
+                                    statRow6
                                 }
                             },
                             new Label
                             {
-                                Text = "Click The Retry",
+                                Text = "Click The Retry Button",
                                 FontSize = 20,
                                 HorizontalTextAlignment = TextAlignment.Center,
                                 Margin = new Thickness(5)
                             },
                             new Label
                             {
-                                Text = "Button To Play Again",
+                                Text = "At The Bottom To Play Again",
                                 FontSize = 20,
                                 HorizontalTextAlignment = TextAlignment.Center,
                                 Margin = new Thickness(5)
@@ -786,14 +875,13 @@ namespace Wordle
             });
             popup.ContentTemplate = templateView;
             popup.Refresh();
+            new Animation(v => statRow1.WidthRequest = v, 1, 250 * ((double)statsList[0] / max)).Commit(this, "statBarAnimation1", 16, (uint)(7 * 250 * ((double)statsList[0] / max)));
+            new Animation(v => statRow2.WidthRequest = v, 1, 250 * ((double)statsList[1] / max)).Commit(this, "statBarAnimation2", 16, (uint)(7 * 250 * ((double)statsList[1] / max)));
+            new Animation(v => statRow3.WidthRequest = v, 1, 250 * ((double)statsList[2] / max)).Commit(this, "statBarAnimation3", 16, (uint)(7 * 250 * ((double)statsList[2] / max)));
+            new Animation(v => statRow4.WidthRequest = v, 1, 250 * ((double)statsList[3] / max)).Commit(this, "statBarAnimation4", 16, (uint)(7 * 250 * ((double)statsList[3] / max)));
+            new Animation(v => statRow5.WidthRequest = v, 1, 250 * ((double)statsList[4] / max)).Commit(this, "statBarAnimation5", 16, (uint)(7 * 250 * ((double)statsList[4] / max)));
+            new Animation(v => statRow6.WidthRequest = v, 1, 250 * ((double)statsList[5] / max)).Commit(this, "statBarAnimation6", 16, (uint)(7 * 250 * ((double)statsList[5] / max)));
         }
-
-        // TODO:
-        //
-        // Add animations for:
-        //
-        // Implement stat saving
-        //
     }
 
 }
